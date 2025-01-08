@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фотоальбом Печорина</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            text-align: center;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .gallery img {
+            max-width: 100%;
+            height: auto;
+            border: 5px solid #2c3e50;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Фотоальбом Печорина</h1>
+    </header>
+    <main>
+        <div class="gallery" id="gallery">
+            <!-- Фотографии будут загружены сюда -->
+        </div>
+    </main>
+    <footer>
+        <p>© 2023 Фотоальбом Печорина. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Ваш API-ключ от Flickr
+        const apiKey = '6ad86b389a31d6f6da3975f6b9343dfc';
+        // ID альбома
+        const photosetId = '72177720323020430';
+        // User ID
+        const userId = '151622329@N08';
+
+        // Функция для получения фотографий из альбома
+        async function getPhotos() {
+            const url = `https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=${apiKey}&photoset_id=${photosetId}&user_id=${userId}&format=json&nojsoncallback=1`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Ошибка HTTP: ${response.status}`);
+                }
+                const data = await response.json();
+                return data.photoset.photo;
+            } catch (error) {
+                console.error('Ошибка при запросе к Flickr API:', error);
+                return null;
+            }
+        }
+
+        // Функция для отображения фотографий
+        async function loadGallery() {
+            const photos = await getPhotos();
+            const gallery = document.getElementById('gallery');
+
+            if (photos && photos.length > 0) {
+                photos.forEach((photo) => {
+                    const imgUrl = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_b.jpg`;
+                    const imgElement = document.createElement('img');
+                    imgElement.src = imgUrl;
+                    imgElement.alt = photo.title;
+                    gallery.appendChild(imgElement);
+                });
+            } else {
+                console.error('Фотографии не найдены.');
+            }
+        }
+
+        // Загрузка галереи при открытии страницы
+        loadGallery();
+    </script>
+</body>
+</html>
