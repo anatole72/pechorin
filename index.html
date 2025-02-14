@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О Борисе Исидоровиче</title>
     <style>
-        /* Существующие стили */
+        /* Общие стили */
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
+            line-height: 1.4; /* Уменьшенный межстрочный интервал */
             margin: 0;
             padding: 0;
             background-color: #f9f9f9;
             color: #333;
+        }
+
+        p {
+            margin-bottom: 5px; /* Уменьшенные отступы между абзацами */
         }
 
         header {
@@ -20,11 +24,6 @@
             color: white;
             padding: 20px;
             text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 24px;
         }
 
         nav {
@@ -44,7 +43,7 @@
             text-decoration: underline;
         }
 
-        /* Новая структура с боковой панелью */
+        /* Макет страницы */
         .page-container {
             display: flex;
             max-width: 1200px;
@@ -55,10 +54,10 @@
 
         main {
             flex: 1;
-            min-width: 0; /* Предотвращает переполнение */
+            min-width: 0;
         }
 
-        /* Стили для боковой формы */
+        /* Боковая панель */
         .sidebar {
             width: 300px;
             position: sticky;
@@ -119,7 +118,7 @@
             background-color: #34495e;
         }
 
-        /* Остальные существующие стили */
+        /* Контент */
         .content-wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -129,19 +128,36 @@
 
         .image-container {
             flex: 1 1 300px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
+        /* Главное фото (300x400) */
         .image-container img {
             border: 5px solid #2c3e50;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            height: auto;
+            width: 300px;
+            height: 400px;
+            object-fit: cover;
         }
 
         .text-content {
             flex: 2 1 400px;
+            font-size: 14px;
+        }
+
+        h2, h3 {
+            margin-bottom: 10px;
+        }
+
+        /* Стихотворение */
+        .poem {
+            font-style: italic;
+            text-align: center;
+            white-space: pre-line;
+            margin-top: 15px;
+            color: #555;
+            line-height: 1.3;
         }
 
         footer {
@@ -152,15 +168,7 @@
             margin-top: 20px;
         }
 
-        .poem {
-            font-style: italic;
-            text-align: center;
-            white-space: pre-line;
-            margin-top: 20px;
-            color: #555;
-        }
-
-        /* Медиа-запрос для адаптивности */
+        /* Адаптивность */
         @media (max-width: 900px) {
             .page-container {
                 flex-direction: column;
@@ -195,12 +203,7 @@
             <!-- Существующий контент main -->
             <div class="content-wrapper">
                 <div class="image-container">
-                    <img 
-  src="./assets/images/pechorin_glavn.jpg" 
-  alt="Фото Бориса Исидоровича" 
-  width="300" 
-  height="400"
->
+                    <img src="./assets/images/pechorin_glavn.jpg"  alt="Фото Бориса Исидоровича" >
                     <p>Фото Бориса Исидоровича</p>
                 </div>
 <p>Борис Исидорович Печорин — преподаватель математики, посвятивший свою жизнь образованию и преподаванию.</p>
